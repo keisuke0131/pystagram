@@ -34,7 +34,7 @@ def access(hash_tag):
     driver.implicitly_wait(10)
     sleep(random.randint(1, 5))
 
-    # ログインID・PWを入力
+    # ログイン
     elem_search_word = driver.find_element_by_name("username")
     elem_search_word.send_keys(insta_id)
     sleep(random.randint(1, 2))
@@ -44,17 +44,18 @@ def access(hash_tag):
     password.send_keys(Keys.ENTER)
     driver.implicitly_wait(10)
     sleep(7)
-    # ２段階認証の保存を選択
+
+    # ２段階認証(保存を選択)
     elem_search_word = driver.find_element_by_css_selector("button.sqdOP").click()
     driver.implicitly_wait(5)
     sleep(7)
 
-    # ポップアップの後でを選択
+    # ポップアップ(後でを選択)
     elem_search_word = driver.find_element_by_css_selector("button.aOOlW").click()
     driver.implicitly_wait(2)
     sleep(7)
 
-    # 検索窓をアドレスバーに直接入力
+    #指定のハッシュタグを検索
     driver.get(f'https://www.instagram.com/explore/tags/{hash_tag}/')
     driver.implicitly_wait(6)
     sleep(7)
@@ -62,16 +63,15 @@ def access(hash_tag):
 def good():
     driver.find_element_by_xpath(
         "//article/div[1]/div[1]/div[1]/div[1]/div[1]/a").click()
-    sleep(random.randint(1, 10))  # エラーになるまでいいねしつづける
+    sleep(random.randint(1, 10))
     like_count = 0
     while (like_count < like_amount):
         try:
-            # いいね判定
+            # いいねしていたらスキップする
             sleep(random.randint(1, 10))
             driver.find_element_by_css_selector("[aria-label=「いいね！」を取り消す]")
             sleep(random.randint(1, 10))
-            # いいねされていたらパス
-            print("いいね済み、パス")
+            print("いいね済み(Skip)")
             driver.find_element_by_css_selector(
                 "a.coreSpriteRightPaginationArrow").click()
             sleep(random.randint(1, 10))
