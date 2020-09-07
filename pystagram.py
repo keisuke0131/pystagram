@@ -15,7 +15,7 @@ insta_password = "gobugobu0131"
 
 #タグ・各々いいねする数
 hash_tags = ["プログラミング","プログラミング初心者","プログラミング学習","プログラミング勉強中","プログラミング入門"]
-like_amount = 30
+like_amount = 100
 scroll_cnt = 6
 search_cnt = 0
 
