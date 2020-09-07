@@ -14,10 +14,10 @@ insta_id = "piyo_univ_html.css"
 insta_password = "gobugobu0131"
 
 #タグ・各々いいねする数
-hash_tags = ["プログラミング","プログラミング初心者","プログラミング学習","プログラミング勉強中","プログラミング入門"]
-like_amount = 100
-scroll_cnt = 6
-search_cnt = 0
+
+hash_tags = ["プログラミング","プログラミング初心者","プログラミング勉強中","プログラミング教室","プログラミング学習"]
+like_amount = 30
+scroll_cnt = 10
 
 driver = webdriver.Chrome("c:/driver/chromedriver.exe")
 
@@ -27,9 +27,9 @@ def scroll(cnt):
         pyautogui.hotkey('End')
         driver.implicitly_wait(7)
         sleep(3)
-        i += 1;
+        i += 1
 
-def access(hash_tag):
+def access():
     driver.get("https://www.instagram.com/accounts/login/")
     driver.implicitly_wait(10)
     sleep(random.randint(1, 5))
@@ -55,16 +55,18 @@ def access(hash_tag):
     driver.implicitly_wait(2)
     sleep(7)
 
-    #指定のハッシュタグを検索
+def search(hash_tag):
     driver.get(f'https://www.instagram.com/explore/tags/{hash_tag}/')
     driver.implicitly_wait(6)
     sleep(7)
+
 
 def good():
     driver.find_element_by_xpath(
         "//article/div[1]/div[1]/div[1]/div[1]/div[1]/a").click()
     sleep(random.randint(1, 10))
     like_count = 0
+    already_good = 0
     while (like_count < like_amount):
         try:
             # いいねしていたらスキップする
@@ -72,6 +74,9 @@ def good():
             driver.find_element_by_css_selector("[aria-label=「いいね！」を取り消す]")
             sleep(random.randint(1, 10))
             print("いいね済み(Skip)")
+            already_good += 1
+            if already_good > 15:
+                break
             driver.find_element_by_css_selector(
                 "a.coreSpriteRightPaginationArrow").click()
             sleep(random.randint(1, 10))
@@ -82,20 +87,23 @@ def good():
             sleep(random.randint(1, 10))
             print(like_count)
             print("いいね！")
+            already_good = 0
             driver.find_element_by_css_selector(
                 "a.coreSpriteRightPaginationArrow").click()
             sleep(random.randint(1, 10))
             pass
-    print(like_count)
-    print("いいねしました！")
     like_count = 0
-    search_cnt+=1;
+    print("次のタグへ切り替えます")
+
+access()
 
 for hash_tag in hash_tags:
-    access(hash_tag)
+    search(hash_tag)
     scroll(scroll_cnt)
     good()
-    driver.close()
+
+print("終了します")
+driver.close()
 
 
 
