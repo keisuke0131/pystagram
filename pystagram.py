@@ -20,7 +20,10 @@ hash_tags = ["プログラミング","プログラミング初心者","プログ
 like_amount = 100
 scroll_cnt = 10
 
-driver = webdriver.Chrome("c:/driver/chromedriver.exe")
+driver_path = '/app/.chromedriver/bin/chromedriver'
+options = webdriver.ChromeOptions()
+options.add_argument('--headless')
+driver = webdriver.Chrome(options=options, executable_path=driver_path)
 
 def scroll(cnt):
     i=0
