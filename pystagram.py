@@ -15,8 +15,9 @@ insta_password = "gobugobu0131"
 
 #タグ・各々いいねする数
 
-hash_tags = ["プログラミング","プログラミング初心者","プログラミング勉強中","プログラミング教室","プログラミング学習"]
-like_amount = 30
+hash_tags = ["プログラミング","プログラミング初心者","プログラミング勉強中","プログラミング教室","プログラミング学習","webデザイン","webデザイナー","ウェブデザイン","ウェブデザイナー","ホームページ制作"]
+
+like_amount = 100
 scroll_cnt = 10
 
 driver = webdriver.Chrome("c:/driver/chromedriver.exe")
@@ -75,7 +76,7 @@ def good():
             sleep(random.randint(1, 10))
             print("いいね済み(Skip)")
             already_good += 1
-            if already_good > 15:
+            if already_good > 30:
                 break
             driver.find_element_by_css_selector(
                 "a.coreSpriteRightPaginationArrow").click()
